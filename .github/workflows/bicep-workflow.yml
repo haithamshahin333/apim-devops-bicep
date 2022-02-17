@@ -19,6 +19,7 @@ env:
   REGION: eastus
   SCOPE: subscription
 
+#checking concurrency
 concurrency: ${{ github.ref }}
 
 jobs:
