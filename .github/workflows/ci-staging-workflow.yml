@@ -1,6 +1,10 @@
 name: bicep-workflow
 
-on: [workflow_dispatch]
+on:
+
+  pull_request:
+    branches:
+      - staging
 
 # https://github.com/actions/runner/issues/480
 # cannot use directly in reusable workflows
@@ -28,6 +32,16 @@ jobs:
     needs: preflight-validation-dev
     with:
       environment: dev
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      PUBLISHER_NAME: ${{ secrets.PUBLISHER_NAME }}
+      PUBLISHER_EMAIL: ${{ secrets.PUBLISHER_EMAIL }}
+
+  preflight-validation-staging:
+    uses: ./.github/workflows/preflight-validation.yml
+    needs: lint
+    with:
+      environment: staging
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
       PUBLISHER_NAME: ${{ secrets.PUBLISHER_NAME }}
