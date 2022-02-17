@@ -24,7 +24,4 @@ jobs:
       - name: Run a one-line script
         env:
           TEST: ${{ secrets.DEPLOY_PARAMETERS }}
-        run: echo "$TEST"
-        
-      - name: test
-        run: echo ${{ secrets.DEPLOY_PARAMETERS }}
+        run: echo "$TEST" hello
