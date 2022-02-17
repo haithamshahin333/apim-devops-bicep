@@ -3,6 +3,7 @@ param apiManagementServiceName string = 'apiservice${uniqueString(resourceGroup(
 
 @description('The email address of the owner of the service')
 @minLength(1)
+@secure()
 param publisherEmail string
 
 @description('The name of the owner of the service')

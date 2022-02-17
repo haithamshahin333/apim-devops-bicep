@@ -8,16 +8,22 @@
 cp main.parameters.json local.parameters.json
 
 # SPECIFY LOCATION FOR DEPLOYMENT (USED FOR METADATA, NOT LOCATION FOR APIM DEPLOYMENT)
-EXPORT LOCATION=eastus
+export LOCATION=eastus
 
 # DEPLOY
 az deployment sub create \
     --location $LOCATION \
+    --name apim-deployment-`date +"%Y-%m-%d-%s"` \
     --template-file main.bicep \
     --parameters local.parameters.json \
     --confirm-with-what-if #if you want to see changes before confirming deployment
 ```
 ## Deployment via GitHub Actions
+
+1. Setup your Environments
+    
+    * Create the Dev Environment
+    * 
 
 1. Define the Service Principal
 

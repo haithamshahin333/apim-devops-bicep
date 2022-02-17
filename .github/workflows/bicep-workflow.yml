@@ -4,13 +4,9 @@ on: [workflow_dispatch]
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    
-    # This step lints the Bicep File based on your bicepconfig.json
-    - name: Lint Bicep File
-      run: az bicep build --file main.bicep
+    uses: ./.github/workflows/lint.yml
+    with:
+      mainBicepFile: ./main.bicep 
       
   validate:
     runs-on: ubuntu-latest
