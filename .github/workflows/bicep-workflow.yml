@@ -68,7 +68,7 @@ jobs:
 
   preflight-validation-prod:
     uses: ./.github/workflows/preflight-validation.yml
-    if: ${{ github.base_ref == 'refs/head/main' || github.ref == 'refs/head/main')}}
+    if: ${{ github.base_ref == 'refs/head/main' || github.ref == 'refs/head/main' }}
     with:
       environment: prod
     secrets:
