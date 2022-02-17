@@ -12,11 +12,18 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
         
+    - name: create local param file
+      env:
+        PARAM_FILE: ${{ secrets.DEPLOY_PARAMETERS }}
+      run: |
+        echo creating local.parameters.json for the run
+        echo $PARAM_FILE > local.parameters.json
+        
     - uses: azure/arm-deploy@v1
       with:
         deploymentName: ${{ github.run_number }}
         scope: subscription
         failOnStdErr: false
         region: eastus
-        template: ./main.bicep
-        parameters: ${{ secrets.DEPLOY_PARAMETERS }}
+        template: main.bicep
+        parameters: local.parameters.json
