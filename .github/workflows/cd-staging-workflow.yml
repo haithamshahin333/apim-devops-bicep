@@ -1,4 +1,4 @@
-name: bicep-workflow
+name: cd-staging-workflow
 
 on:
 

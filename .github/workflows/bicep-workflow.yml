@@ -48,6 +48,7 @@ jobs:
 
   preflight-validation-staging:
     uses: ./.github/workflows/preflight-validation.yml
+    needs: lint
     with:
       environment: staging
     secrets:
@@ -69,6 +70,7 @@ jobs:
   preflight-validation-prod:
     uses: ./.github/workflows/preflight-validation.yml
     if: ${{ github.base_ref == 'refs/head/main' || github.ref == 'refs/head/main' }}
+    needs: lint
     with:
       environment: prod
     secrets:
