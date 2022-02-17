@@ -24,11 +24,11 @@ concurrency: ${{ github.ref }}
 
 jobs:
 
-  echo:
-    runs-on: ubuntu-latest
-    steps:
-      - name: View github context
-        run: echo '${{ toJSON(github) }}'
+  # echo:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: View github context
+  #       run: echo '${{ toJSON(github) }}'
 
   lint:
     uses: ./.github/workflows/lint.yml
