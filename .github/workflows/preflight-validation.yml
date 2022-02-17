@@ -4,24 +4,24 @@ on:
   workflow_call:
     inputs:
 
-      mainBicepFile:
-        required: true
-        type: string
-        default: './main.bicep'
-
-      deploymentRegion:
-        required: true
-        type: string
-        default: 'eastus'
-
-      deploymentScope:
-        required: true
-        type: string
-        default: 'subscription'
-
       environment:
         required: true
         type: string
+
+      mainBicepFile:
+        required: false
+        type: string
+        default: ./main.bicep
+
+      deploymentRegion:
+        required: false
+        type: string
+        default: eastus
+
+      deploymentScope:
+        required: false
+        type: string
+        default: subscription
 
     secrets:
 
