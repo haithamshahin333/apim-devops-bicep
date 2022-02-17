@@ -47,7 +47,7 @@ jobs:
     
     - uses: azure/arm-deploy@v1
       with:
-        deploymentName: ${{ github.run_number }}
+        deploymentName: ${{ inputs.environment }}-${{ github.run_number }}-${{ github.sha}}
         scope: ${{ inputs.deploymentScope }}
         failOnStdErr: false
         region: ${{ inputs.deploymentRegion }}
