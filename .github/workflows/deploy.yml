@@ -9,19 +9,19 @@ on:
         type: string
 
       mainBicepFile:
-        required: true
+        required: false
         type: string
-        default: './main.bicep'
+        default: ./main.bicep
 
       deploymentRegion:
-        required: true
+        required: false
         type: string
-        default: 'eastus'
+        default: eastus
 
       deploymentScope:
-        required: true
+        required: false
         type: string
-        default: 'subscription'
+        default: subscription
 
     secrets:
 

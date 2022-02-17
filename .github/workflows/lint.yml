@@ -5,9 +5,9 @@ on:
 
     inputs:
       mainBicepFile:
-        required: true
+        required: false
         type: string
-        default: './main.bicep'
+        default: ./main.bicep
 
 jobs:
   lint:
