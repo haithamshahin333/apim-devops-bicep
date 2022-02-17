@@ -3,8 +3,8 @@ name: bicep-workflow
 on: [workflow_dispatch, push]
 
 env:
-  deploymentRegion: eastus
-  deploymentScope: subscription
+  REGION: eastus
+  SCOPE: subscription
 
 jobs:
 
@@ -18,8 +18,8 @@ jobs:
     needs: lint
     with:
       mainBicepFile: ./main.bicep
-      deploymentRegion: ${{ env.deploymentRegion }}
-      deploymentScope: ${{ env.deploymentScope }}
+      deploymentRegion: ${{ env.REGION }}
+      deploymentScope: ${{ env.SCOPE }}
       environment: Development
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
@@ -32,8 +32,8 @@ jobs:
     with:
       environment: Development
       mainBicepFile: ./main.bicep
-      deploymentRegion: ${{ env.deploymentRegion }}
-      deploymentScope: ${{ env.deploymentScope }}
+      deploymentRegion: ${{ env.REGION }}
+      deploymentScope: ${{ env.SCOPE }}
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
       DEPLOY_PARAMETERS: ${{ secrets.DEPLOY_PARAMETERS }}
