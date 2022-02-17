@@ -11,17 +11,17 @@ on:
       mainBicepFile:
         required: true
         type: string
-        default: main.bicep
+        default: './main.bicep'
 
       deploymentRegion:
         required: true
         type: string
-        default: eastus
+        default: 'eastus'
 
       deploymentScope:
         required: true
         type: string
-        default: subscription
+        default: 'subscription'
 
     secrets:
 

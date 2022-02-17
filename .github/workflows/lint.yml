@@ -7,7 +7,7 @@ on:
       mainBicepFile:
         required: true
         type: string
-        default: main.bicep
+        default: './main.bicep'
 
 jobs:
   lint:
