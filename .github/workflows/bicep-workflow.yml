@@ -12,11 +12,14 @@ jobs:
 
   lint:
     uses: ./.github/workflows/lint.yml
+    with:
+      mainBicepFile: ./main.bicep 
       
   preflight-validation-dev:
     uses: ./.github/workflows/preflight-validation.yml
     needs: lint
     with:
+      mainBicepFile: ./main.bicep
       environment: Development
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
@@ -28,6 +31,7 @@ jobs:
     needs: preflight-validation-dev
     with:
       environment: Development
+      mainBicepFile: ./main.bicep
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
       DEPLOY_PARAMETERS: ${{ secrets.DEPLOY_PARAMETERS }}
