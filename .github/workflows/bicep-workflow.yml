@@ -71,6 +71,6 @@ jobs:
     - name: Run Test Against APIM
       run: echo TESTING
 
-  rollback:
-    runs-on: ubuntu-latest
-    needs: test
+  # rollback:
+  #   runs-on: ubuntu-latest
+  #   needs: test
