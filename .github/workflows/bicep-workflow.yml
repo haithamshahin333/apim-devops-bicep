@@ -1,0 +1,29 @@
+name: bicep-workflow
+
+on: [workflow_dispatch]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    - name: create local param file
+      env:
+        PARAM_FILE: ${{ secrets.DEPLOY_PARAMETERS }}
+      run: |
+        echo creating local.parameters.json for the run
+        echo $PARAM_FILE > local.parameters.json
+        
+    - uses: azure/arm-deploy@v1
+      with:
+        deploymentName: ${{ github.run_number }}
+        scope: subscription
+        failOnStdErr: false
+        region: eastus
+        template: main.bicep
+        parameters: local.parameters.json
