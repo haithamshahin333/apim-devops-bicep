@@ -23,7 +23,8 @@ az deployment sub create \
 1. Setup your Environments
     
     * Create the Dev Environment
-    * 
+    * Create the Staging Environment
+    * Create the Production Environment
 
 1. Define the Service Principal
 

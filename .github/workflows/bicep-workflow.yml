@@ -1,75 +1,49 @@
 name: bicep-workflow
 
-on: [workflow_dispatch]
+on: [workflow_dispatch, push]
+
+env:
+  deploymentRegion: eastus
+  deploymentScope: subscription
 
 jobs:
+
   lint:
     uses: ./.github/workflows/lint.yml
     with:
       mainBicepFile: ./main.bicep 
       
-  validate:
-    runs-on: ubuntu-latest
+  preflight-validation-dev:
+    uses: ./.github/workflows/preflight-validation.yml
     needs: lint
-    steps:
-    - uses: actions/checkout@v2
+    with:
+      mainBicepFile: ./main.bicep
+      deploymentRegion: ${{ env.deploymentRegion }}
+      deploymentScope: ${{ env.deploymentScope }}
+      environment: Development
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      PUBLISHER_NAME: ${{ secrets.PUBLISHER_NAME }}
+      PUBLISHER_EMAIL: ${{ secrets.PUBLISHER_EMAIL }}
     
-    - uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-    
-    # Setup local params file with secret
-    - name: Create Local Params
-      env:
-        PARAM_FILE: ${{ secrets.DEPLOY_PARAMETERS }}
-      run: |
-        echo creating local.parameters.json for the run
-        echo $PARAM_FILE > local.parameters.json
-    
-    # This step does 'preflight validation' with ARM - check valid names, regions, etc.
-    - name: Preflight Validation
-      uses: azure/arm-deploy@v1
-      with:
-        deploymentName: ${{ github.run_number }}
-        scope: subscription
-        failOnStdErr: false
-        deploymentMode: Validate
-        region: eastus
-        template: main.bicep
-        parameters: local.parameters.json
-    
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [lint,validate]
-    steps:
-    - uses: actions/checkout@v2
-    
-    - uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
-    - name: create local param file
-      env:
-        PARAM_FILE: ${{ secrets.DEPLOY_PARAMETERS }}
-      run: |
-        echo creating local.parameters.json for the run
-        echo $PARAM_FILE > local.parameters.json
-        
-    - uses: azure/arm-deploy@v1
-      with:
-        deploymentName: ${{ github.run_number }}
-        scope: subscription
-        failOnStdErr: false
-        region: eastus
-        template: main.bicep
-        parameters: local.parameters.json
-        
-  test:
-    runs-on: ubuntu-latest
-    needs: deploy
-    steps:
-    - name: Run Test Against APIM
-      run: echo TESTING
+  deploy-dev:
+    uses: ./.github/workflows/deploy.yml
+    needs: preflight-validation-dev
+    with:
+      environment: Development
+      mainBicepFile: ./main.bicep
+      deploymentRegion: ${{ env.deploymentRegion }}
+      deploymentScope: ${{ env.deploymentScope }}
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      DEPLOY_PARAMETERS: ${{ secrets.DEPLOY_PARAMETERS }}
+ 
+  # test:
+  #   runs-on: ubuntu-latest
+  #   needs: deploy
+  #   steps:
+  #   - name: Run Test Against APIM
+  #     run: echo TESTING
 
   # rollback:
   #   runs-on: ubuntu-latest

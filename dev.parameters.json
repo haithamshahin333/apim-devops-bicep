@@ -8,14 +8,11 @@
       "publisherName": {
           "value": "PUBLISHER-NAME"
       },
-      "apimServiceName": {
-        "value": "APIM-NAME"
-      },
       "apimEnv": {
-        "value": "ENV-NAME"
+        "value": "dev"
       },
       "resourceGroupName": {
-        "value": "RESOURCE-GROUP-NAME"
+        "value": "apim-dev"
       }
     }
   }
