@@ -27,7 +27,7 @@ jobs:
   preflight-validation-dev:
     uses: ./.github/workflows/preflight-validation.yml
     needs: lint
-    if: ${{ github.event_name == 'pull_request'}}
+    # if: ${{ github.event_name == 'pull_request'}}
     with:
       environment: dev
     secrets:
@@ -36,7 +36,7 @@ jobs:
       PUBLISHER_EMAIL: ${{ secrets.PUBLISHER_EMAIL }}
     
   deploy-dev:
-    if: ${{ github.event_name == 'pull_request' }}
+    # if: ${{ github.event_name == 'pull_request' }}
     uses: ./.github/workflows/deploy.yml
     needs: preflight-validation-dev
     with:
@@ -59,7 +59,7 @@ jobs:
   deploy-staging:
     uses: ./.github/workflows/deploy.yml
     needs: preflight-validation-staging
-    if: ${{ github.event_name == 'push' || (github.event_name == 'pull_request' && github.base_ref == 'refs/head/main')}}
+    if: ${{ github.event_name == 'push' || (github.event_name == 'pull_request' && github.base_ref == 'refs/heads/main')}}
     with:
       environment: staging
     secrets:
@@ -69,7 +69,7 @@ jobs:
 
   preflight-validation-prod:
     uses: ./.github/workflows/preflight-validation.yml
-    if: ${{ github.base_ref == 'refs/head/main' || github.ref == 'refs/head/main' }}
+    if: ${{ github.base_ref == 'refs/heads/main' || github.ref == 'refs/heads/main' }}
     needs: lint
     with:
       environment: prod
@@ -81,7 +81,7 @@ jobs:
   deploy-prod:
     uses: ./.github/workflows/deploy.yml
     needs: preflight-validation-prod
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/head/main' }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     with:
       environment: prod
     secrets:
