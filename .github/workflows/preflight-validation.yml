@@ -49,7 +49,7 @@ jobs:
     - name: Preflight Validation
       uses: azure/arm-deploy@v1
       with:
-        deploymentName: ${{ inputs.environment }}-${{ github.run_number }}-${{ github.sha}}-preflight-validation
+        deploymentName: ${{ inputs.environment }}-${{ github.sha}}-preflight-validation
         scope: ${{ inputs.deploymentScope }}
         failOnStdErr: false
         deploymentMode: Validate
