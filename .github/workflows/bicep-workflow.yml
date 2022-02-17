@@ -34,7 +34,8 @@ jobs:
       mainBicepFile: ./main.bicep
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
-      DEPLOY_PARAMETERS: ${{ secrets.DEPLOY_PARAMETERS }}
+      PUBLISHER_NAME: ${{ secrets.PUBLISHER_NAME }}
+      PUBLISHER_EMAIL: ${{ secrets.PUBLISHER_EMAIL }}
  
   # test:
   #   runs-on: ubuntu-latest
