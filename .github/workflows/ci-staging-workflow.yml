@@ -39,7 +39,7 @@ jobs:
 
   preflight-validation-staging:
     uses: ./.github/workflows/preflight-validation.yml
-    needs: lint
+    needs: deploy-dev
     with:
       environment: staging
     secrets:
