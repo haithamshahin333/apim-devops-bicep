@@ -12,10 +12,12 @@ on:
       deploymentRegion:
         required: true
         type: string
+        default: eastus
 
       deploymentScope:
         required: true
         type: string
+        default: subscription
 
       environment:
         required: true

@@ -2,6 +2,8 @@ name: bicep-workflow
 
 on: [workflow_dispatch, push]
 
+# https://github.com/actions/runner/issues/480
+# cannot use directly in reusable workflows
 env:
   REGION: eastus
   SCOPE: subscription
@@ -10,16 +12,11 @@ jobs:
 
   lint:
     uses: ./.github/workflows/lint.yml
-    with:
-      mainBicepFile: ./main.bicep 
       
   preflight-validation-dev:
     uses: ./.github/workflows/preflight-validation.yml
     needs: lint
     with:
-      mainBicepFile: ./main.bicep
-      deploymentRegion: ${{ env.REGION }}
-      deploymentScope: ${{ env.SCOPE }}
       environment: Development
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
@@ -31,9 +28,6 @@ jobs:
     needs: preflight-validation-dev
     with:
       environment: Development
-      mainBicepFile: ./main.bicep
-      deploymentRegion: ${{ env.REGION }}
-      deploymentScope: ${{ env.SCOPE }}
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
       DEPLOY_PARAMETERS: ${{ secrets.DEPLOY_PARAMETERS }}
