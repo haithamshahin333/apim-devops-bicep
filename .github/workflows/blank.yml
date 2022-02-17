@@ -23,5 +23,5 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         env:
-          TEST: ${{ secrets.DEPLOY_PARAMETERS.publisherName }}
+          TEST: ${{ secrets.DEPLOY_PARAMETERS }}.publisherName
         run: echo "$TEST" hello
