@@ -12,7 +12,7 @@
         "value": "prod"
       },
       "resourceGroupName": {
-        "value": "apim-prod"
+        "value": "apim-prod-rg"
       }
     }
   }

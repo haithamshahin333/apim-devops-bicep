@@ -18,6 +18,9 @@ param publisherName string
 ])
 param sku string = 'Developer'
 
+param subnetName string = 'DefaultSubnet'
+param vnetName string = 'vnet'
+
 @description('The instance size of this API Management service.')
 @allowed([
   1
@@ -27,6 +30,7 @@ param skuCount int = 1
 
 @description('Location for all resources.')
 param location string = resourceGroup().location
+
 
 resource apiManagementService 'Microsoft.ApiManagement/service@2021-08-01' = {
   name: apiManagementServiceName
@@ -38,6 +42,10 @@ resource apiManagementService 'Microsoft.ApiManagement/service@2021-08-01' = {
   properties: {
     publisherEmail: publisherEmail
     publisherName: publisherName
+    virtualNetworkConfiguration: {
+      subnetResourceId: resourceId('Microsoft.Network/virtualNetworks/subnets', vnetName, subnetName)
+    }
+    virtualNetworkType: 'Internal'
   }
 }
 
