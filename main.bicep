@@ -46,6 +46,8 @@ module shared 'shared/shared.bicep' = {
   scope: resourceGroup
   params: {
     apimInstance: serviceConfig.outputs.apimInstance
+    apimEnv: apimEnv
+    
   }
 }
 
