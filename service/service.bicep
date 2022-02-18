@@ -35,6 +35,9 @@ param location string = resourceGroup().location
 resource apiManagementService 'Microsoft.ApiManagement/service@2021-08-01' = {
   name: apiManagementServiceName
   location: location
+  tags: {
+    'testing-service-change': 'true'
+  }
   sku: {
     name: sku
     capacity: skuCount
