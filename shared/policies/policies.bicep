@@ -18,6 +18,6 @@ resource policy 'Microsoft.ApiManagement/service/policies@2021-08-01' = {
   name: '${apimInstanceName}/policy'
   properties: {
     format: 'rawxml'
-    value: envConfigMap[apimEnv]
+    value: envConfigMap[apimEnv].policyFile
   }
 }
