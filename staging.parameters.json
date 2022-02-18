@@ -9,10 +9,10 @@
           "value": "PUBLISHER-NAME"
       },
       "apimEnv": {
-        "value": "nonprod"
+        "value": "staging"
       },
       "resourceGroupName": {
-        "value": "apim-nonprod"
+        "value": "apim-staging-rg"
       }
     }
   }

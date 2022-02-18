@@ -12,7 +12,7 @@
         "value": "dev"
       },
       "resourceGroupName": {
-        "value": "apim-dev"
+        "value": "apim-dev-rg"
       }
     }
   }
