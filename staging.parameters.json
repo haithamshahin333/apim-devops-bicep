@@ -13,6 +13,9 @@
       },
       "resourceGroupName": {
         "value": "apim-staging-rg"
+      },
+      "virtualNetworkType": {
+        "value": "None"
       }
     }
   }

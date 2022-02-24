@@ -13,6 +13,9 @@
       },
       "resourceGroupName": {
         "value": "apim-prod-rg"
+      },
+      "virtualNetworkType": {
+        "value": "None"
       }
     }
   }
