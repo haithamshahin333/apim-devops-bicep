@@ -10,10 +10,10 @@ module javaApi 'javaAPI/javaApi.bicep' = {
   }
 }
 
-module brandNewApi 'brandNewAPI/brandNewApi.bicep' = {
-  name: 'brandNewApi'
-  params: {
-    apimServiceName: apimInstance.name
-    apimEnv: apimEnv
-  }
-}
+// module brandNewApi 'brandNewAPI/brandNewApi.bicep' = {
+//   name: 'brandNewApi'
+//   params: {
+//     apimServiceName: apimInstance.name
+//     apimEnv: apimEnv
+//   }
+// }
