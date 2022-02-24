@@ -1,5 +1,5 @@
-param apimInstance object
 
+param apimInstance object
 param apimEnv string
 
 module javaApi 'javaAPI/javaApi.bicep' = {
@@ -10,10 +10,10 @@ module javaApi 'javaAPI/javaApi.bicep' = {
   }
 }
 
-module brandNewApi 'brandNewAPI/brandNewApi.bicep' = {
-  name: 'brandNewApi'
-  params: {
-    apimServiceName: apimInstance.name
-    apimEnv: apimEnv
-  }
-}
+// module brandNewApi 'brandNewAPI/brandNewApi.bicep' = {
+//   name: 'brandNewApi'
+//   params: {
+//     apimServiceName: apimInstance.name
+//     apimEnv: apimEnv
+//   }
+// }

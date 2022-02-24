@@ -10,8 +10,9 @@ param publisherName string
 param apimServiceName string = 'apim'
 param apimEnv string = 'dev'
 
-param subnetName string = 'DefaultSubnet'
-param vnetName string = 'vnet'
+param virtualNetworkType string = 'None'
+param subnetName string = ''
+param vnetName string = ''
 
 @description('The pricing tier of this API Management service')
 @allowed([
@@ -24,6 +25,11 @@ param sku string = 'Developer'
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   name: resourceGroupName
   location: location
+  tags: {
+    'environment': apimEnv
+    'resource': 'apim'
+    'demo': 'true'
+  }
 }
 
 var apimName = '${apimServiceName}-${apimEnv}-${uniqueString(resourceGroup.id)}'
@@ -38,6 +44,8 @@ module serviceConfig 'service/service.bicep' = {
     sku: sku
     subnetName: subnetName
     vnetName: vnetName
+    apimEnv: apimEnv
+    virtualNetworkType: virtualNetworkType
   }
 }
 

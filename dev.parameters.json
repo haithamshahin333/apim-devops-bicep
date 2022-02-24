@@ -12,7 +12,10 @@
         "value": "dev"
       },
       "resourceGroupName": {
-        "value": "apim-dev-rg"
+        "value": "apim-dev-group"
+      },
+      "virtualNetworkType": {
+        "value": "None"
       }
     }
   }
