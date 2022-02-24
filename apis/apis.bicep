@@ -1,5 +1,5 @@
-param apimInstance object
 
+param apimInstance object
 param apimEnv string
 
 module javaApi 'javaAPI/javaApi.bicep' = {

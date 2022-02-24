@@ -18,8 +18,18 @@ param publisherName string
 ])
 param sku string = 'Developer'
 
-param subnetName string = 'DefaultSubnet'
-param vnetName string = 'vnet'
+@allowed([
+  'Internal'
+  'External'
+  'None'
+])
+param virtualNetworkType string = 'Internal'
+
+
+param apimEnv string
+
+param subnetName string = ''
+param vnetName string = ''
 
 @description('The instance size of this API Management service.')
 @allowed([
@@ -36,7 +46,7 @@ resource apiManagementService 'Microsoft.ApiManagement/service@2021-08-01' = {
   name: apiManagementServiceName
   location: location
   tags: {
-    'testing-service-change': 'true'
+    'environment': apimEnv
   }
   sku: {
     name: sku
@@ -45,10 +55,10 @@ resource apiManagementService 'Microsoft.ApiManagement/service@2021-08-01' = {
   properties: {
     publisherEmail: publisherEmail
     publisherName: publisherName
-    virtualNetworkConfiguration: {
-      subnetResourceId: resourceId('Microsoft.Network/virtualNetworks/subnets', vnetName, subnetName)
-    }
-    virtualNetworkType: 'Internal'
+    virtualNetworkConfiguration: ((!empty(vnetName) && !empty(subnetName)) ? { 
+      subnetResourceId: resourceId('Microsoft.Network/virtualNetworks/subnets', vnetName, subnetName) 
+    } : null)
+    virtualNetworkType: virtualNetworkType
   }
 }
 

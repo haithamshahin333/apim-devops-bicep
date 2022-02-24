@@ -10,8 +10,9 @@ param publisherName string
 param apimServiceName string = 'apim'
 param apimEnv string = 'dev'
 
-param subnetName string = 'DefaultSubnet'
-param vnetName string = 'vnet'
+param virtualNetworkType string = 'None'
+param subnetName string = ''
+param vnetName string = ''
 
 @description('The pricing tier of this API Management service')
 @allowed([
@@ -38,6 +39,8 @@ module serviceConfig 'service/service.bicep' = {
     sku: sku
     subnetName: subnetName
     vnetName: vnetName
+    apimEnv: apimEnv
+    virtualNetworkType: virtualNetworkType
   }
 }
 
