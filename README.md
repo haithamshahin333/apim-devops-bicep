@@ -55,7 +55,40 @@ az deployment sub create \
     - Policies (Global/Product Level)
     - Loggers
 
-* Portal Instantiation
+## Portal Initialization
+
+1. First you can seed your `portal-content` folder by capturing the content from an experimental APIM instance where you customized and updated the portal:
+
+    ```bash
+    cd api-management-developer-portal
+    npm install
+
+    cd scripts.v3
+    node ./capture \
+    --subscriptionId <SUB_ID_OF_DEV_APIM> \
+    --resourceGroupName <RG_NAME> \
+    --service-name <APIM_NAME> \
+    --folder ../../portal-content
+    ```
+
+    > Moving forward you can now commit your portal content as an artifact you maintain like your other code and configuration for APIM
+
+2. You can run manually the `generateAndPublish.js` script if you want to now publish this content to a specific APIM instance:
+
+    ```bash
+    cd api-management-developer-portal
+    npm install
+
+    cd scripts.v3
+    node ./generateAndPublish.js \
+    --subscriptionId <SUB_ID_OF_TARGET_APIM> \
+    --resourceGroupName <RG_NAME> \
+    --service-name <APIM_NAME> \
+    --folder ../../portal-content
+    ```
+
+    > Note that the `portal-content` folder should have a `media` folder as well even if there are no contents in the `media` folder
+
 
 ## References
 

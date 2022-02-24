@@ -1,0 +1,3 @@
+[submodule "api-management-developer-portal"]
+	path = api-management-developer-portal
+	url = git@github.com:haithamshahin333/api-management-developer-portal.git
