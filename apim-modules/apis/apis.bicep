@@ -9,11 +9,3 @@ module javaApi 'javaAPI/javaApi.bicep' = {
     apimEnv: apimEnv
   }
 }
-
-module demoFridayApi 'demoFridayApi/demoFridayApi.bicep' = {
-  name: 'demoFridayApi'
-  params: {
-    apimServiceName: apimInstance.name
-    apimEnv: apimEnv
-  }
-}

@@ -3,16 +3,17 @@ param apimEnv string
 
 var envConfigMap = {
   dev: {
-    url: 'https://api-dev-amtf7sehwlmdi.azurewebsites.net'
+    url: 'https:DEV-URL'
   }
   staging: {
-    url: 'https://api-staging-z5dlqnsfvnwaw.azurewebsites.net'
+    url: 'https:STAGING-URL'
   }
   prod: {
-    url: 'https://api-prod-4iexmenv2zf6g.azurewebsites.net'
+    url: 'https:PROD-URL'
   }
 }
 
+//example openapi spec provided
 resource javaApi 'Microsoft.ApiManagement/service/apis@2021-08-01' = {
   name: '${apimServiceName}/javaApi'
   properties: {
