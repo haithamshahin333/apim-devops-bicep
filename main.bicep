@@ -33,7 +33,7 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
 }
 
 var apimName = '${apimServiceName}-${apimEnv}-${uniqueString(resourceGroup.id)}'
-module serviceConfig 'service/service.bicep' = {
+module serviceConfig 'apim-modules/service/service.bicep' = {
   name: 'serviceConfiguration'
   scope: resourceGroup
   params: {
@@ -49,7 +49,7 @@ module serviceConfig 'service/service.bicep' = {
   }
 }
 
-module shared 'shared/shared.bicep' = {
+module shared 'apim-modules/shared/shared.bicep' = {
   name: 'shared'
   scope: resourceGroup
   params: {
@@ -59,7 +59,7 @@ module shared 'shared/shared.bicep' = {
   }
 }
 
-module apis 'apis/apis.bicep' = {
+module apis 'apim-modules/apis/apis.bicep' = {
   name: 'apis'
   scope: resourceGroup
   params: {
